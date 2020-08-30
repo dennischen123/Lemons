@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Grid} from '@material-ui/core';
 import useAddRemoveItem from '../hooks/useAddRemoveItem';
 import CardTest from '../components/CardTest';
+import Card from '../components/Card';
 import { TextField, Button } from '@material-ui/core';
 import {useState, useEffect} from 'react';
 
@@ -51,7 +52,7 @@ export default function ColumnTest(props) {
 
     return (
         <Grid item container column spacing={2} xs={4} ref={drop} className={classes.isDropped}>
-            {itemList && itemList.map(item => <CardTest key={item.id} item={item} handleRemove={handleRemoveItem}></CardTest>)}
+            {itemList && itemList.map(item => <Card key={item.id} item={item} handleRemove={handleRemoveItem}></Card>)}
             <Grid item>
                 <form>
                     <TextField id="standard-basic" label="ID" onChange={(e) => setId(e.target.value)} value={id}></TextField>

@@ -8,38 +8,33 @@ import Card from '../components/Card';
 import Column from '../components/Column';
 import ColumnTest from '../components/ColumnTest';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles((theme) => ({
 	root: {
-
-	}
-});
+		backgroundColor: 'gray',
+		height: '100vh',
+	},
+	title: {
+		height: '10%'
+	},
+    column: {
+        // height: '100%',
+    }
+}));
 
 export default function Index() {
 	const classes = useStyles();
 	return (
-	<Grid container spacing={3}>
-		<Grid item container xs={12} justify='center' alignItems="center">
-			<h1>Title</h1>
-		</Grid>
-		<Grid item container xs={12}>
-			<ColumnTest></ColumnTest>
-			<ColumnTest></ColumnTest>
-			<ColumnTest></ColumnTest>
-			{/* <Grid item xs={4}>
-				<Paper>section title</Paper>
-				<Column>
-					<Card></Card>
-				</Column>
+	<Grid container spacing={3} className={classes.root}>
+		<Grid item xs={1}></Grid>
+		<Grid item container xs={10}>
+			<Grid item container justify="center" alignItems="center" xs={12}>
+				<h1>KanBan Board</h1>
 			</Grid>
-			<Grid item xs={4}>
-				<Paper>section title</Paper>
-				<Column></Column>
-			</Grid>
-			<Grid item xs={4}>
-				<Paper>section title</Paper>
-				<Column></Column>
-			</Grid> */}
+			<ColumnTest></ColumnTest>
+			<ColumnTest></ColumnTest>
+			<ColumnTest></ColumnTest>
 		</Grid>
+		<Grid item xs={1}></Grid>
 	</Grid>
 	);
 }

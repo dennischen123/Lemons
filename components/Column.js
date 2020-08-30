@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 export default function ColumnTest(props) {
-    const [id, setId] = useState();
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [itemList, handleAddItem, handleRemoveItem] = useAddRemoveItem();
@@ -42,6 +41,7 @@ export default function ColumnTest(props) {
         })
     },[itemList])
     const handleClick = () => {
+        const id = Math.random().toString(16).substr(2,16);
         handleAddItem({id,title,description})
     }
     // const handleDelete = () => {
@@ -54,7 +54,7 @@ export default function ColumnTest(props) {
             {itemList && itemList.map(item => <CardTest key={item.id} item={item} handleRemove={handleRemoveItem}></CardTest>)}
             <Grid item>
                 <form>
-                    <TextField id="standard-basic" label="ID" onChange={(e) => setId(e.target.value)} value={id}></TextField>
+                    {/* <TextField id="standard-basic" label="ID" onChange={(e) => setId(e.target.value)} value={id}></TextField> */}
                     <TextField id="standard-basic" label="Title"  onChange={(e) => setTitle(e.target.value)} value={title}></TextField>
                     <TextField id="standard-basic" label="Description"  onChange={(e) => setDescription(e.target.value)} value={description}></TextField>
                 </form>
