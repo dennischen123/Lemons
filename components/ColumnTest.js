@@ -55,7 +55,7 @@ export default function ColumnTest(props) {
 
     return (
         <Grid item container direction={"column"} spacing={2} xs={4} ref={drop} className={classes.isDropped}>
-            <Grid item container direction={"row"} spacing={0}>
+            <Grid item container direction={"row"} spacing={1}>
                 {itemList && itemList.map(item => <CardTest key={item.id} item={item} handleRemove={handleRemoveItem}></CardTest>)}
             </Grid>
             <Grid item>

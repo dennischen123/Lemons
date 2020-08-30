@@ -2,8 +2,8 @@ import { useDrag } from 'react-dnd';
 import { DragSource } from 'react-dnd';
 import ITEM_TYPES from '../data/types';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper} from '@material-ui/core';
-
+import { Grid, Paper, Button} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
     isDragged: props => {
@@ -11,9 +11,12 @@ const useStyles = makeStyles((theme) => ({
             // fontSize: 50,
             cursor: 'pointer',
             fontWeight: 'bold',
-            height: '10vh',
+            // height: '10vh',
             opacity: props.isDragging ? 0 : 1,
         }
+    },
+    button: {
+        height: '100%'
     }
 }));
 
@@ -44,8 +47,23 @@ export default function CardTest(props) {
     const classes = useStyles({isDragging});
     return (
         <Grid item xs={11} ref={drag} className={classes.isDragged}>
-            <Paper variant="outlined">
-                <p>{props.item.description}</p>
+            <Paper>
+                <Grid container>
+                    <Grid item xs={8}>
+                        <p>{props.item.description}</p>
+                    </Grid>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={2}>
+                        <Button
+                            fullWidth
+                            className={classes.button}
+                            color="secondary"
+                            startIcon={<DeleteIcon/>}
+                            onClick={() => props.handleRemove(props.item)}
+                        ></Button>
+                    </Grid>
+                </Grid>
+
             </Paper>
         </Grid>
     )
