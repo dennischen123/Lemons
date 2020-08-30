@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
             height: '100%',
         }
     },
+    containerStyle: {
+        border: '2p'
+
+    },
     column: {
         height: '100%',
     }
@@ -29,8 +33,8 @@ export default function ColumnTest(props) {
         drop: (item, monitor) => {
             // const didDrop = monitor.didDrop();
             // if(didDrop) {
-                console.log(item)
-                handleAddItem(item)
+                handleAddItem(item.item)
+
             // }
             // console.log(`I'm dropped in the drop zone${item.id}`)
         },
@@ -50,20 +54,19 @@ export default function ColumnTest(props) {
     const classes = useStyles({isOver, dropResult})
 
     return (
-        <Grid item container column spacing={2} xs={4} ref={drop} className={classes.isDropped}>
-            {itemList && itemList.map(item => <CardTest key={item.id} item={item} handleRemove={handleRemoveItem}></CardTest>)}
+        <Grid item container direction={"column"} spacing={2} xs={4} ref={drop} className={classes.isDropped}>
+            <Grid item container direction={"row"} spacing={0}>
+                {itemList && itemList.map(item => <CardTest key={item.id} item={item} handleRemove={handleRemoveItem}></CardTest>)}
+            </Grid>
             <Grid item>
                 <form>
                     {/* <TextField id="standard-basic" label="ID" onChange={(e) => setId(e.target.value)} value={id}></TextField> */}
                     <TextField id="standard-basic" label="Title"  onChange={(e) => setTitle(e.target.value)} value={title}></TextField>
                     <TextField id="standard-basic" label="Description"  onChange={(e) => setDescription(e.target.value)} value={description}></TextField>
+                    <Button onClick={handleClick}>
+                        Add
+                    </Button>
                 </form>
-            </Grid>
-            <Grid item>
-                <Button onClick={handleClick}>
-                    Add
-                </Button>
-                {/* <Button onClick={handleDelete}></Button> */}
             </Grid>
         </Grid>
     )

@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
             // fontSize: 50,
             cursor: 'pointer',
             fontWeight: 'bold',
+            height: '10vh',
             opacity: props.isDragging ? 0 : 1,
         }
     }
@@ -42,10 +43,9 @@ export default function CardTest(props) {
     })
     const classes = useStyles({isDragging});
     return (
-        <Grid item xs={12} ref={drag} className={classes.isDragged}>
-            <Paper>
-                <p>title:{props.item.title}</p>
-                <p>description:{props.item.description}</p>
+        <Grid item xs={11} ref={drag} className={classes.isDragged}>
+            <Paper variant="outlined">
+                <p>{props.item.description}</p>
             </Paper>
         </Grid>
     )
