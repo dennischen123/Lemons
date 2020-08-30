@@ -62,17 +62,12 @@ export default function ColumnTest(props) {
                 {itemList && itemList.map(item => <CardTest key={item.id} description={description} setDescription={setDescription} item={item} handleRemove={handleRemoveItem}></CardTest>)}
             </Grid>
             <Grid item>
-                {/* <form> */}
-                    {/* <TextField id="standard-basic" label="ID" onChange={(e) => setId(e.target.value)} value={id}></TextField> */}
-                    {/* <TextField id="standard-basic" label="Title"  onChange={(e) => setTitle(e.target.value)} value={title}></TextField> */}
-                    {/* <TextField id="standard-basic" label="Description"  onChange={(e) => setDescription(e.target.value)} value={description}></TextField> */}
                     <Button
                         fullWidth
                         onClick={() => setOpen(true)}
                         startIcon={<AddIcon></AddIcon>}
                         >
                     </Button>
-                {/* </form> */}
             </Grid>
             <MyModal open={open} setOpen={setOpen}>
                 <>

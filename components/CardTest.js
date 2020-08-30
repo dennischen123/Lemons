@@ -10,36 +10,26 @@ import MyModal from '../components/MyModal';
 const useStyles = makeStyles((theme) => ({
     isDragged: props => {
         return {
-            // fontSize: 50,
             cursor: 'pointer',
             fontWeight: 'bold',
-            // height: '10vh',
             opacity: props.isDragging ? 0 : 1,
         }
     },
     button: {
         height: '100%'
     },
-    paper: {
-        position: 'fixed',
-        width: 400,
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-        top: '30%',
-        left: '40%'
-      },
 }));
 
 
 export default function CardTest(props) {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+
+    const [description, setDescription] = useState(props.item.description)
     // { extraProps } from monitor
     const [{ isDragging }, drag] = useDrag({
         item:{
             type: ITEM_TYPES.CARD,
-            item: props.item,
+            item: {...props.item, description},
             id: props.item.id,
             //and any other data you want to pass ex:id of card
         },
@@ -64,7 +54,6 @@ export default function CardTest(props) {
                 <Grid container>
                     <Grid item xs={8}>
                         <p>{props.item.title}</p>
-                        {/* <p>{props.item.description}</p> */}
                     </Grid>
                     <Grid item xs={2}></Grid>
                     <Grid item xs={2}>
@@ -79,12 +68,22 @@ export default function CardTest(props) {
                 </Grid>
             </Paper>
             <MyModal open={open} setOpen={setOpen}>
-                <>
-                    <h2>Title: {props.item.title}</h2>
-                    <p>
-                        Description: {props.item.description}
-                    </p>
-                </>
+                <Grid container spacing={1} direction={"column"} justify={"center"} alignItems={"center"}>
+                    <Grid item>
+                        <h2>Title: {props.item.title}</h2>
+                    </Grid>
+                    <Grid item>
+                        <TextField onChange={(e) => setDescription(e.target.value)} value={description}></TextField>
+                    </Grid>
+                    <Grid item>
+                        <Button 
+                            onClick={() => setOpen(false)} 
+                            fullWidth 
+                            color="primary" 
+                            variant="contained">Save
+                        </Button>
+                    </Grid>
+                </Grid>
             </MyModal>
         </Grid>
     )
