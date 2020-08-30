@@ -6,6 +6,7 @@ import useAddRemoveItem from '../hooks/useAddRemoveItem';
 import CardTest from '../components/CardTest';
 import { TextField, Button } from '@material-ui/core';
 import {useState, useEffect} from 'react';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
     isDropped: props => {
@@ -63,8 +64,11 @@ export default function ColumnTest(props) {
                     {/* <TextField id="standard-basic" label="ID" onChange={(e) => setId(e.target.value)} value={id}></TextField> */}
                     <TextField id="standard-basic" label="Title"  onChange={(e) => setTitle(e.target.value)} value={title}></TextField>
                     <TextField id="standard-basic" label="Description"  onChange={(e) => setDescription(e.target.value)} value={description}></TextField>
-                    <Button onClick={handleClick}>
-                        Add
+                    <Button
+                        fullWidth
+                        onClick={handleClick}
+                        startIcon={<AddIcon></AddIcon>}
+                        >
                     </Button>
                 </form>
             </Grid>

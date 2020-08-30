@@ -1,9 +1,11 @@
+import {useState} from 'react';
 import { useDrag } from 'react-dnd';
 import { DragSource } from 'react-dnd';
 import ITEM_TYPES from '../data/types';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Button} from '@material-ui/core';
+import { Grid, Paper, Button, Modal} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import MyModal from '../components/MyModal';
 
 const useStyles = makeStyles((theme) => ({
     isDragged: props => {
@@ -17,11 +19,22 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         height: '100%'
-    }
+    },
+    paper: {
+        position: 'fixed',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        top: '30%',
+        left: '40%'
+      },
 }));
 
 
 export default function CardTest(props) {
+    const [open, setOpen] = useState(false)
     // { extraProps } from monitor
     const [{ isDragging }, drag] = useDrag({
         item:{
@@ -47,10 +60,11 @@ export default function CardTest(props) {
     const classes = useStyles({isDragging});
     return (
         <Grid item xs={11} ref={drag} className={classes.isDragged}>
-            <Paper>
+            <Paper onClick={() => setOpen(true)}>
                 <Grid container>
                     <Grid item xs={8}>
-                        <p>{props.item.description}</p>
+                        <p>{props.item.title}</p>
+                        {/* <p>{props.item.description}</p> */}
                     </Grid>
                     <Grid item xs={2}></Grid>
                     <Grid item xs={2}>
@@ -63,8 +77,15 @@ export default function CardTest(props) {
                         ></Button>
                     </Grid>
                 </Grid>
-
             </Paper>
+            <MyModal open={open} setOpen={setOpen}>
+                <>
+                    <h2>Title: {props.item.title}</h2>
+                    <p>
+                    Description: {props.item.description}
+                    </p>
+                </>
+            </MyModal>
         </Grid>
     )
 }
