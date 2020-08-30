@@ -3,7 +3,7 @@ import { useDrag } from 'react-dnd';
 import { DragSource } from 'react-dnd';
 import ITEM_TYPES from '../data/types';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper, Button, Modal} from '@material-ui/core';
+import { Grid, Paper, Button, TextField} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MyModal from '../components/MyModal';
 
@@ -82,7 +82,7 @@ export default function CardTest(props) {
                 <>
                     <h2>Title: {props.item.title}</h2>
                     <p>
-                    Description: {props.item.description}
+                        Description: {props.item.description}
                     </p>
                 </>
             </MyModal>

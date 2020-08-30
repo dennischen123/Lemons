@@ -7,6 +7,7 @@ import CardTest from '../components/CardTest';
 import { TextField, Button } from '@material-ui/core';
 import {useState, useEffect} from 'react';
 import AddIcon from '@material-ui/icons/Add';
+import MyModal from '../components/MyModal';
 
 const useStyles = makeStyles((theme) => ({
     isDropped: props => {
@@ -27,6 +28,7 @@ export default function ColumnTest(props) {
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [itemList, handleAddItem, handleRemoveItem] = useAddRemoveItem();
+    const [open, setOpen] = useState(false);
 
 
     const [{isOver, dropResult}, drop] = useDrop({
@@ -57,21 +59,39 @@ export default function ColumnTest(props) {
     return (
         <Grid item container direction={"column"} spacing={2} xs={4} ref={drop} className={classes.isDropped}>
             <Grid item container direction={"row"} spacing={1}>
-                {itemList && itemList.map(item => <CardTest key={item.id} item={item} handleRemove={handleRemoveItem}></CardTest>)}
+                {itemList && itemList.map(item => <CardTest key={item.id} description={description} setDescription={setDescription} item={item} handleRemove={handleRemoveItem}></CardTest>)}
             </Grid>
             <Grid item>
-                <form>
+                {/* <form> */}
                     {/* <TextField id="standard-basic" label="ID" onChange={(e) => setId(e.target.value)} value={id}></TextField> */}
+                    {/* <TextField id="standard-basic" label="Title"  onChange={(e) => setTitle(e.target.value)} value={title}></TextField> */}
+                    {/* <TextField id="standard-basic" label="Description"  onChange={(e) => setDescription(e.target.value)} value={description}></TextField> */}
+                    <Button
+                        fullWidth
+                        onClick={() => setOpen(true)}
+                        startIcon={<AddIcon></AddIcon>}
+                        >
+                    </Button>
+                {/* </form> */}
+            </Grid>
+            <MyModal open={open} setOpen={setOpen}>
+                <>
                     <TextField id="standard-basic" label="Title"  onChange={(e) => setTitle(e.target.value)} value={title}></TextField>
                     <TextField id="standard-basic" label="Description"  onChange={(e) => setDescription(e.target.value)} value={description}></TextField>
                     <Button
                         fullWidth
-                        onClick={handleClick}
+                        onClick={() => {
+                            handleClick();
+                            setTitle();
+                            setDescription();
+                            setOpen(false);
+                        }}
                         startIcon={<AddIcon></AddIcon>}
                         >
+                        Add
                     </Button>
-                </form>
-            </Grid>
+                </>
+            </MyModal>
         </Grid>
     )
 }
